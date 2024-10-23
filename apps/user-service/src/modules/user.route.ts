@@ -1,5 +1,6 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import { $ref } from "./user.schema";
+import { createUser, login } from './user.controller'
 
 export async function userRoutes(app: FastifyInstance) {
   app.get("/", (req: FastifyRequest, reply: FastifyReply) => {
@@ -14,7 +15,7 @@ export async function userRoutes(app: FastifyInstance) {
         response: { 201: $ref("createUserResponseSchema") },
       },
     },
-    () => {}
+    createUser
   );
 
   app.post(
@@ -27,7 +28,7 @@ export async function userRoutes(app: FastifyInstance) {
         },
       },
     },
-    () => {}
+    login
   );
 
   app.delete("/logout", () => {});
