@@ -15,6 +15,8 @@ const wallet = new ethers.Wallet(process.env.DEPLOYER_PRIVATE_KEY, provider);
 // Load the ZodiacNFT contract
 const nftContract = new ethers.Contract(contractAddress, contractABI, wallet);
 
+app.post("/mint");
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`[nft-service] is running on port ${PORT}`);

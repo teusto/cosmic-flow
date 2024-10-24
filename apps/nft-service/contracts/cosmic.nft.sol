@@ -1,32 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract CosmicNFT is ERC721, Ownable {
-    uint256 private _tokenIDS;
-    mapping (uint256 => string) private _tokenURLS;
+contract CosmicNFT is ERC721URIStorage, Ownable {
+    uint256 private _tokenIds;
 
-    constructor() ERC721("CosmicNFT", "COSMOS"){}
+    constructor(address initialOwner) ERC721("CosmicNFT", "COSMOS") Ownable(initialOwner) {}
 
-    function mintNFT(address recipient, string memory tokenURL) public onlyOwner  returns (uint256) {
-        __tokenIDS++;
-        uint256 newItemID = _tokenIDS;
+    function mintNFT(address recipient, string memory tokenURI) public onlyOwner  returns (uint256) {
+        _tokenIds++;
+        uint256 newItemId = _tokenIds;
 
-        _mint(recipient, newItemID);
-        _setTokenUrl(newItemID, tokenURL);
+        _mint(recipient, newItemId);
+        _setTokenURI(newItemId, tokenURI);
 
-        return newItemID;
-    }
-
-    function _setTokenUrl(uint256 tokenID, string memory tokenURL) internal {
-        require(_exists(tokenID), "ERC721Metadata: URL set of nonexistent token");
-        _tokenURLS[tokenID] = tokenURL;
-    }
-
-    function tokenURI(uint256 tokenID) public view returns (string memory) {
-        require(_exists(tokenID), "ERC721Metadata: URI query for nonexistent token");
-        return _tokenURLS[tokenID];
+        return newItemId;
     }
 }
