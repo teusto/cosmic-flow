@@ -3,5 +3,6 @@ export interface ISign {
     startDate: Date;
     endDate: Date;
     element:'Fire' | 'Earth' | 'Air' | 'Water';
-    rullingPlanet: 'Moon' | 'Sun' | 'Mercury' | 'Mars' | 'Venus' | 'Pluto' | 'Jupiter' | 'Saturn' | 'Uranus' | 'Neptune';
+    rulingPlanet: 'Moon' | 'Sun' | 'Mercury' | 'Mars' | 'Venus' | 'Pluto' | 'Jupiter' | 'Saturn' | 'Uranus' | 'Neptune';
+    house: any;
 }
