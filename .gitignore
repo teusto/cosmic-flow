@@ -27,3 +27,5 @@ build
 .log
 *.code-workspace
 .vscode
+artifacts
+cache

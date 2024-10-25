@@ -5,12 +5,14 @@ async function main(){
 
     const CosmicNFT = await ethers.getContractFactory("CosmicNFT");
     const nft = await CosmicNFT.deploy(deployer.address);
-    await nft.deployed();
+    await nft.waitForDeployment();
 
-    console.log("CosmicNFT deployed to: ", nft.address);
+    console.log("CosmicNFT deployed to: ", nft.target);
 }
 
-main.catch((error) => {
+main()
+  .then(() => process.exit(0))
+  .catch(error => {
     console.error(error);
-    process.exitCode = 1;
-})
+    process.exit(1);
+  });
